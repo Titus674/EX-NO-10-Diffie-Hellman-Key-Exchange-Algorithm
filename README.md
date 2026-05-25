@@ -19,11 +19,61 @@ To Implement Diffie Hellman Key Exchange Algorithm
 5. Security: The difficulty of computing discrete logarithms ensures that the shared key remains secure even if public values are intercepted.
 
 ## Program:
+```
+#include <stdio.h>
+#include <math.h>
 
+int power(int base, int exp, int mod)
+{
+    int result = 1;
+
+    while(exp > 0)
+    {
+        result = (result * base) % mod;
+        exp--;
+    }
+    return result;
+}
+
+int main()
+{
+    int p, g;
+    int a, b;
+    int A, B;
+    int keyA, keyB;
+
+    printf("Enter prime number (p): ");
+    scanf("%d", &p);
+
+    printf("Enter primitive root (g): ");
+    scanf("%d", &g);
+
+    printf("Enter private key of User A: ");
+    scanf("%d", &a);
+
+    printf("Enter private key of User B: ");
+    scanf("%d", &b);
+
+    A = power(g, a, p);
+    B = power(g, b, p);
+
+    printf("\nPublic Key of User A = %d", A);
+    printf("\nPublic Key of User B = %d", B);
+
+    keyA = power(B, a, p);
+    keyB = power(A, b, p);
+
+    printf("\n\nSecret Key computed by User A = %d", keyA);
+    printf("\nSecret Key computed by User B = %d", keyB);
+
+    return 0;
+}
+```
 
 
 ## Output:
 
+<img width="1704" height="894" alt="Screenshot 2026-05-25 143248" src="https://github.com/user-attachments/assets/24279509-bd39-4e8c-898c-ac900bd41a61" />
 
 
 ## Result:
